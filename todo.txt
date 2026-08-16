@@ -9,7 +9,7 @@ Chunk 1.1 — Project scaffolding
 - [ ] Deploy empty shell to Vercel
 
 Chunk 1.2 — Authentication
-- [ ] Enable email/password auth in Supabase
+- [x] Enable email/password auth in Supabase
 - [x] Signup page
 - [x] Login page
 - [x] Logout button
