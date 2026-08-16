@@ -1,0 +1,154 @@
+**Phase 1 — Auth, roles & notes**
+
+Chunk 1.1 — Project scaffolding
+- [x] Create GitHub repo
+- [x] Init React app (Vite)
+- [x] Install Tailwind, basic config
+- [ ] Create Supabase project
+- [x] Connect Supabase SDK (env vars: URL + anon key)
+- [ ] Deploy empty shell to Vercel
+
+Chunk 1.2 — Authentication
+- [ ] Enable email/password auth in Supabase
+- [x] Signup page
+- [x] Login page
+- [x] Logout button
+- [x] Protected-route wrapper (redirect if not logged in)
+
+Chunk 1.3 — Roles & access
+- [ ] Add `role` column to profiles table (student/instructor)
+- [x] Set role at signup
+- [ ] Row-level security policies (students see own data, instructors see all)
+- [x] Route guards by role
+- [x] Empty dashboard shells (student view, instructor view)
+
+Chunk 1.4 — Lecture notes
+- [ ] `modules` + `lecture_notes` tables
+- [ ] Instructor upload UI (file → Supabase Storage)
+- [x] Instructor edit note metadata (title, module, order)
+- [x] Student browse-by-module view
+- [ ] Student view/download a note
+
+**Phase 2 — Editor + run button**
+
+Chunk 2.1 — Judge0 setup
+- [ ] Sign up on RapidAPI, subscribe to Judge0 CE free plan
+- [ ] Test one submission via curl/Postman
+- [ ] Store API key server-side only (never in frontend)
+- [ ] Write a `submitCode(source, language, stdin)` wrapper
+
+Chunk 2.2 — Monaco integration
+- [ ] Install `@monaco-editor/react`
+- [ ] Embed editor on a test page
+- [ ] Language picker (C, C++, Java, Python min.)
+- [ ] Theme + font config
+
+Chunk 2.3 — Run button + output
+- [ ] "Run" calls `submitCode()` with sample input
+- [ ] Loading state
+- [ ] Display stdout/stderr/time/memory
+- [ ] Handle compile error / timeout / runtime error distinctly
+
+Chunk 2.4 — Notepad
+- [ ] Second editor/textarea instance, separate from graded editor
+- [ ] Autosave on debounce (~2s)
+- [ ] Load saved draft on open
+- [ ] Scope per user + per problem
+
+**Phase 3 — Challenges & grading**
+
+Chunk 3.1 — Data model + creation
+- [ ] `problems` table (title, statement, difficulty, limits)
+- [ ] `test_cases` table (input, expected_output, is_hidden)
+- [ ] Instructor: create problem + add test cases
+- [ ] Instructor: edit/delete problems
+
+Chunk 3.2 — Student challenge view
+- [ ] Problem list (filter by difficulty/module)
+- [ ] Problem detail page (statement, constraints, sample I/O)
+- [ ] Wire in editor + run against sample cases only
+
+Chunk 3.3 — Submission + grading
+- [ ] `submissions` table (code, language, verdict, score)
+- [ ] "Submit" runs against ALL test cases
+- [ ] Compare actual vs expected per case
+- [ ] Compute + store score
+
+Chunk 3.4 — Results
+- [ ] Pass/fail per case (hidden inputs stay hidden)
+- [ ] Show runtime + memory used
+- [ ] Submission history page
+
+**Phase 4 — Timed assessments**
+
+Chunk 4.1 — Scheduling
+- [ ] `assessments` table (start_time, end_time, problem_ids)
+- [ ] Instructor: create/schedule, pick problems
+- [ ] Student: upcoming/active assessments list
+
+Chunk 4.2 — Timed flow
+- [ ] Lock access outside start/end window
+- [ ] Countdown timer UI
+- [ ] Auto-submit or lock editor at time-up
+- [ ] Block viewing problems pre-start
+
+Chunk 4.3 — Leaderboard
+- [ ] Rank by score, then time
+- [ ] Supabase Realtime subscription
+- [ ] Auto-refreshing leaderboard UI
+
+**Phase 5 — Analytics & integrity**
+
+Chunk 5.1 — Dashboards
+- [ ] Student: problems solved, score trend
+- [ ] Instructor: pass rate per problem, per-student table
+
+Chunk 5.2 — Similarity check
+- [ ] Adapt your TF-IDF/fuzzy/Jaccard pipeline to code submissions
+- [ ] Flag pairs above threshold
+- [ ] Instructor view: flagged pairs, side-by-side diff
+
+Chunk 5.3 — Exam integrity
+- [ ] Detect tab switch / window blur, log timestamp
+- [ ] Detect fullscreen exit
+- [ ] Surface flags in instructor's assessment review
+ 
+**Phase 6 — Hardening & production readiness**
+
+Chunk 6.1 — Load & concurrency
+- [ ] Test Judge0 queue behavior under burst load (simulate 30-50 simultaneous submissions)
+- [ ] Add a per-user submission rate limit (prevent spam-clicking Run)
+- [ ] Set sane time/memory limits per language
+- [ ] Fallback message if Judge0 is rate-limited or down
+
+Chunk 6.2 — Security review
+- [ ] Audit all Supabase RLS policies (students can't read others' submissions/notepad)
+- [ ] Confirm API keys never exposed to frontend
+- [ ] Add CORS + input validation on all endpoints
+- [ ] Cap code submission size
+
+Chunk 6.3 — Reliability
+- [ ] Error monitoring (e.g. Sentry) wired into frontend + backend
+- [ ] Manual DB backup routine (free tier has none built in)
+- [ ] Keep-alive ping so the Supabase project doesn't auto-pause
+- [ ] Uptime check (e.g. UptimeRobot) on API + frontend
+
+**Phase 7 — Polish & launch**
+
+Chunk 7.1 — UI pass
+- [ ] Responsive check on mobile (notes + problem view at minimum)
+- [ ] Empty/loading/error states for every list view
+- [ ] Consistent styling pass (spacing, colors, typography)
+
+Chunk 7.2 — Docs & onboarding
+- [ ] README with setup + local dev instructions
+- [ ] Short "how to use" guide for classmates
+- [ ] Instructor quick-start (create a problem, schedule an assessment)
+
+Chunk 7.3 — Soft launch
+- [ ] Seed with 1-2 real modules of lecture notes
+- [ ] Seed with a small practice problem set
+- [ ] Invite 5-10 classmates to test
+- [ ] Collect feedback, fix top issues before full rollout
+
+That's the complete roadmap, setup through launch.
